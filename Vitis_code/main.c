@@ -100,7 +100,25 @@ static XAxiCdma Dma; /* Instance of the XAxiCdma */
 // #define CDMA_BRAM_MEMORY_1 0x42000000	// portB of BRAM (connection from PS)
 // #define CDMA_OCM_MEMORY_0 0x00000000
 
+typedef enum
+{
+	NOP,
+	ADD,
+	SUB,
+	MUL,
+	DOT_SFT,
+	DOT_ACC,
+	DOT_CLR,
+	PASS_B
+} Opcode;
 
+typedef enum
+{
+	MADD,
+	MSUB,
+	MTRANS,
+	MDOT
+} MatrixOp;
 
 u64 instructions[MAX_INST_COUNT] = {0};
 u16 pc = 0;
@@ -115,7 +133,8 @@ u32 Dst_BRAM[DMA_TRANSFER_SIZE] __attribute__((section(".mba_bram_section")));
 u32 *cdma_memory_destination_bram0 = (u32 *)CDMA_BRAM_MEMORY_0;	  // BRAM A
 u32 *cdma_memory_destination_bram1 = (u32 *)CDMA_BRAM_MEMORY_1;	  // BRAM B
 u32 *cdma_memory_destination_bram2 = (u32 *)CDMA_BRAM_MEMORY_2;	  // BRAM INS
-
+u32 *cdma_memory_destination_bram3 = (u32 *)CDMA_BRAM_MEMORY_3;	  // BRAM R
+u32 *(cdma_memory_destination_bram4) = (u32 *)CDMA_BRAM_MEMORY_4; // BRAM CHECK
 // u32 *cdma_memory_destination_ocm = (u32 *)CDMA_OCM_MEMORY_0;		// for CDMA to access the OCM
 
 // AXI CDMA related definitions
@@ -140,6 +159,10 @@ int SetupInterruptSystem(XScuGic *GicInstancePtr, XAxiCdma *DmaPtr);
 static void Example_CallBack(void *CallBackRef, u32 IrqMask, int *IgnorePtr);
 // function decleration for simple 8-bit lfsr for pseudo-random number generator
 
+void single_inst_gen(Opcode opcode, u16 a_addr, u16 b_addr, u16 r_addr);
+void inst_gen(MatrixOp op, u16 a_start, u16 b_start, u16 r_start, u16 m, u16 n, u16 p);
+void reset_pc();
+void SendInstructions();
 
 u32 lfsr_rand();
 u32 check = 0x00000001;
