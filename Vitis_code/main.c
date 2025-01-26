@@ -140,10 +140,6 @@ int SetupInterruptSystem(XScuGic *GicInstancePtr, XAxiCdma *DmaPtr);
 static void Example_CallBack(void *CallBackRef, u32 IrqMask, int *IgnorePtr);
 // function decleration for simple 8-bit lfsr for pseudo-random number generator
 
-void single_inst_gen(Opcode opcode, u16 a_addr, u16 b_addr, u16 r_addr);
-void inst_gen(MatrixOp op, u16 a_start, u16 b_start, u16 r_start, u16 m, u16 n, u16 p);
-void reset_pc();
-void SendInstructions();
 
 u32 lfsr_rand();
 u32 check = 0x00000001;
