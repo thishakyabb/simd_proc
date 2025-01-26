@@ -100,25 +100,7 @@ static XAxiCdma Dma; /* Instance of the XAxiCdma */
 // #define CDMA_BRAM_MEMORY_1 0x42000000	// portB of BRAM (connection from PS)
 // #define CDMA_OCM_MEMORY_0 0x00000000
 
-typedef enum
-{
-	NOP,
-	ADD,
-	SUB,
-	MUL,
-	DOT_SFT,
-	DOT_ACC,
-	DOT_CLR,
-	PASS_B
-} Opcode;
 
-typedef enum
-{
-	MADD,
-	MSUB,
-	MTRANS,
-	MDOT
-} MatrixOp;
 
 u64 instructions[MAX_INST_COUNT] = {0};
 u16 pc = 0;
