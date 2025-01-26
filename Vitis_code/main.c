@@ -115,8 +115,7 @@ u32 Dst_BRAM[DMA_TRANSFER_SIZE] __attribute__((section(".mba_bram_section")));
 u32 *cdma_memory_destination_bram0 = (u32 *)CDMA_BRAM_MEMORY_0;	  // BRAM A
 u32 *cdma_memory_destination_bram1 = (u32 *)CDMA_BRAM_MEMORY_1;	  // BRAM B
 u32 *cdma_memory_destination_bram2 = (u32 *)CDMA_BRAM_MEMORY_2;	  // BRAM INS
-u32 *cdma_memory_destination_bram3 = (u32 *)CDMA_BRAM_MEMORY_3;	  // BRAM R
-u32 *(cdma_memory_destination_bram4) = (u32 *)CDMA_BRAM_MEMORY_4; // BRAM CHECK
+
 // u32 *cdma_memory_destination_ocm = (u32 *)CDMA_OCM_MEMORY_0;		// for CDMA to access the OCM
 
 // AXI CDMA related definitions
